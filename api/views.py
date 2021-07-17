@@ -36,7 +36,6 @@ class JoinRoom(APIView):
         code = request.data.get(self.lookup_url_kwargs)
         name = request.data.get('name')
         host = self.request.session.session_key
-        print(request.data)
         if code is not None:
             room_result = Room.objects.filter(code=code)
             if len(room_result) > 0:
