@@ -1,0 +1,1 @@
+import App from "./frontend/src/components/App"
