@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'song_request.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db9ldrs54a016f',
-        'USER': 'kzcvlriaotixlo',
-        'PASSWORD': 'f2704430e6d0c55a1081ed395a0122ae0907c953008ce6956f89955ff212b87a',
-        'HOST': 'ec2-34-193-101-0.compute-1.amazonaws.com',
+        'NAME': 'song_request',
+        'USER': 'user_default',
+        'PASSWORD': 'defaultdatabase',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -136,3 +136,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+CLIENT_ID = "8702eedd9ee148f884b744615aaa78b0"
+CLIENT_SECREET = "ff5ca7ad453d431383257072b6a51d62"
+REDIRECT_URI = "http://127.0.0.1:8000/spotify/redirect"

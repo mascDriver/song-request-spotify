@@ -13,5 +13,5 @@ Então se você tem sugestões ou melhorias, faça um fork ou crie uma issue par
 ## Fork no projeto
 #### Se você quiser se aventurar nesse código tenha instalado npm e python, assumindo que você sabe o básico faça o seguinte:
 ##### Na raiz do projeto rode `pip install -r requeriments.txt`
-##### E na pasta  `frontend` rode  `npm install`
+#####Na raiz também rode  `npm install`
 execute o runserver python e o run npm em suas respectivas pastas e se divirta!

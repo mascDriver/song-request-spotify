@@ -1,4 +1,4 @@
-from .credentials import REDIRECT_URI, CLIENT_ID, CLIENT_SECREET
+from django.conf import settings
 from rest_framework.views import APIView
 from requests import Request, post
 from rest_framework import status
@@ -17,8 +17,8 @@ class AuthURL(APIView):
         url = Request('GET', 'https://accounts.spotify.com/authorize', params={
             'scope': scopes,
             'response_type': 'code',
-            'redirect_uri': REDIRECT_URI,
-            'client_id': CLIENT_ID,
+            'redirect_uri': settings.REDIRECT_URI,
+            'client_id': settings.CLIENT_ID,
         }).prepare().url
 
         return Response({'url': url}, status=status.HTTP_200_OK)
@@ -31,9 +31,9 @@ def spotify_callback(request, format=None):
     response = post('https://accounts.spotify.com/api/token', data={
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': REDIRECT_URI,
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECREET
+        'redirect_uri': settings.REDIRECT_URI,
+        'client_id': settings.CLIENT_ID,
+        'client_secret': settings.CLIENT_SECREET
     }).json()
 
     access_token = response.get('access_token')
