@@ -8,7 +8,6 @@ class TokenAdminCustom(TokenAdmin):
     classe para colocar user em raw id na criação de tokens
     """
     autocomplete_fields = ("user",)
-    fields = ('user', 'key')
 
 
 admin.site.unregister(TokenProxy)
