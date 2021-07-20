@@ -70,8 +70,11 @@ class CreateRoomView(APIView):
             public = serializer.data.get('public')
             host = self.request.session.session_key
             if not TokenProxy.objects.filter(key=key_access).exists():
-                return Response({'message': 'Você provavelmente não esta autorizado.\nSolicite acesso com '
-                                            'https://twitter.com/diogobaltazar_'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({
+                    'message': 'Você provavelmente não esta autorizado.\nSolicite acesso comigo no: ',
+                    'link_url': 'https://twitter.com/diogobaltazar_',
+                    'link_name': 'Twitter'
+                }, status=status.HTTP_403_FORBIDDEN)
             queryset = Room.objects.filter(host=host)
             queryset_old = Room.objects.exclude(host=host)
             queryset_old.delete()

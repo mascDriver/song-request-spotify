@@ -28,6 +28,8 @@ export default class CreateRoomPage extends Component {
       guestCanPause: this.props.guestCanPause,
       votesToSkip: this.props.votesToSkip,
       errorMsg: "",
+      errorLink: "",
+      errorNameLink: "",
       successMsg: "",
       streamLink: "",
       keyAccess: "",
@@ -91,6 +93,8 @@ export default class CreateRoomPage extends Component {
                 .then((data) =>{
                       this.setState({
                         errorMsg: data.message,
+                        errorLink: data.link_url,
+                        errorNameLink: data.link_name,
                       });
                     }
                 );
@@ -184,6 +188,9 @@ export default class CreateRoomPage extends Component {
                       }}
                   >
                     {this.state.errorMsg}
+                    <Link to={{pathname: this.state.errorLink}} target="_blank">
+                      {this.state.errorNameLink}
+                    </Link>
                   </Alert>
               )}
             </Collapse>
