@@ -30,6 +30,7 @@ export default class CreateRoomPage extends Component {
       errorMsg: "",
       successMsg: "",
       streamLink: "",
+      keyAccess: "",
       public: true
     };
 
@@ -38,11 +39,17 @@ export default class CreateRoomPage extends Component {
     this.handleGuestCanPauseChange = this.handleGuestCanPauseChange.bind(this);
     this.handleUpdateButtonPressed = this.handleUpdateButtonPressed.bind(this);
     this.handleLinkStream = this.handleLinkStream.bind(this)
+    this.handleKey = this.handleKey.bind(this)
   }
 
   handleVotesChange(e) {
     this.setState({
       votesToSkip: e.target.value,
+    });
+  }
+  handleKey(e) {
+    this.setState({
+      keyAccess: e.target.value,
     });
   }
   handleLinkStream(e) {
@@ -70,12 +77,26 @@ export default class CreateRoomPage extends Component {
         votes_to_skip: this.state.votesToSkip,
         guest_can_pause: this.state.guestCanPause,
         stream_link: this.state.streamLink,
+        key_access: this.state.keyAccess,
         public: this.state.public
       }),
     };
     fetch("/api/create-room", requestOptions)
-        .then((response) => response.json())
-        .then((data) => this.props.history.push("/room/" + data.code));
+        .then((response) => {
+          if (response.ok) {
+            response.json()
+                .then((data) => this.props.history.push("/room/" + data.code));
+          } else {
+            response.json()
+                .then((data) =>{
+                      this.setState({
+                        errorMsg: data.message,
+                      });
+                    }
+                );
+            this.props.updateCallback();
+          }
+        })
   }
 
   handleUpdateButtonPressed() {
@@ -199,6 +220,12 @@ export default class CreateRoomPage extends Component {
           </Grid>
           <Grid item xs={12} align="center">
             <FormControl>
+              <TextField
+                  onChange={this.handleKey}
+                  label="Digite ou cole sua key de acesso"
+                  labelPlacement="bottom"
+                  type="password"
+              />
               <TextField
                   onChange={this.handleLinkStream}
                   placeholder="twitch.tv/mascDriver"

@@ -1,6 +1,7 @@
 from rest_framework import generics, status
 from .serializers import RoomSerializer, CreateRoomSerializer, UpdateRoomSerializer
 from .models import Room, UsersRoom
+from rest_framework.authtoken.models import TokenProxy
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -65,8 +66,12 @@ class CreateRoomView(APIView):
             guest_can_pause = serializer.data.get('guest_can_pause')
             votes_to_skip = serializer.data.get('votes_to_skip')
             stream_link = serializer.data.get('stream_link')
+            key_access = request.data.get('key_access')
             public = serializer.data.get('public')
             host = self.request.session.session_key
+            if not TokenProxy.objects.filter(key=key_access).exists():
+                return Response({'message': 'Você provavelmente não esta autorizado.\nSolicite acesso com '
+                                            'https://twitter.com/diogobaltazar_'}, status=status.HTTP_403_FORBIDDEN)
             queryset = Room.objects.filter(host=host)
             queryset_old = Room.objects.exclude(host=host)
             queryset_old.delete()

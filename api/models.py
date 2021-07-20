@@ -20,7 +20,7 @@ class Room(models.Model):
     votes_to_skip = models.IntegerField(null=False, default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     current_song = models.CharField(max_length=50, null=True)
-    stream_link = models.CharField(max_length=100, null=True)
+    stream_link = models.CharField(max_length=100, null=True, blank=True)
     public = models.BooleanField(default=False)
 
 
