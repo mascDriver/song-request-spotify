@@ -12,6 +12,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {Checkbox, Collapse, Input} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import {CheckBox} from "@material-ui/icons";
+import CustomButtom from "./CustomButtom";
 
 export default class CreateRoomPage extends Component {
   static defaultProps = {
@@ -44,6 +45,21 @@ export default class CreateRoomPage extends Component {
     this.handleKey = this.handleKey.bind(this)
   }
 
+  getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
   handleVotesChange(e) {
     this.setState({
       votesToSkip: e.target.value,
@@ -74,7 +90,7 @@ export default class CreateRoomPage extends Component {
   handleRoomButtonPressed() {
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 'X-CSRFToken': this.getCookie('csrftoken') },
       body: JSON.stringify({
         votes_to_skip: this.state.votesToSkip,
         guest_can_pause: this.state.guestCanPause,
@@ -106,7 +122,7 @@ export default class CreateRoomPage extends Component {
   handleUpdateButtonPressed() {
     const requestOptions = {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 'X-CSRFToken': this.getCookie('csrftoken')},
       body: JSON.stringify({
         votes_to_skip: this.state.votesToSkip,
         guest_can_pause: this.state.guestCanPause,
@@ -131,18 +147,15 @@ export default class CreateRoomPage extends Component {
     return (
         <Grid container spacing={1}>
           <Grid item xs={12} align="center">
-            <Button
-                color="primary"
+            <CustomButtom
+                color="blue"
                 variant="contained"
                 onClick={this.handleRoomButtonPressed}
-            >
-              Criar sala
-            </Button>
+                value="Criar sala"
+            />
           </Grid>
           <Grid item xs={12} align="center">
-            <Button color="secondary" variant="contained" to="/" component={Link}>
-              Voltar
-            </Button>
+            <CustomButtom color="red" variant="contained" href="/"  value="Voltar"/>
           </Grid>
         </Grid>
     );
@@ -151,13 +164,12 @@ export default class CreateRoomPage extends Component {
   renderUpdateButtons() {
     return (
         <Grid item xs={12} align="center">
-          <Button
+          <CustomButtom
               color="primary"
               variant="contained"
               onClick={this.handleUpdateButtonPressed}
-          >
-            Update Room
-          </Button>
+              value="Update Room"
+          />
         </Grid>
     );
   }

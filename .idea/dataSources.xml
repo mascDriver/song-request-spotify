@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://ec2-34-193-101-0.compute-1.amazonaws.com:5432/db9ldrs54a016f</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - song_request@localhost" uuid="3f5381e3-5b5f-4298-9bd9-f49d31862019">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/song_request</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

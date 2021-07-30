@@ -6,7 +6,7 @@ import {
     ListItemText,
     TextField,
     ListItemAvatar,
-    Avatar, Snackbar
+    Avatar, Snackbar, Grid
 } from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {Alert} from "@material-ui/lab";
@@ -59,37 +59,39 @@ export default class SearchMusic extends Component {
     }
     render() {
         return (
-            <FormLabel>
-                <Autocomplete
-                    id="combo-box-demo"
-                    onInputChange={this.handleChange}
-                    options={this.tale}
-                    getOptionLabel={(option) => option.title}
-                    onChange={this.handleClick}
-                    style={{ width: 800, padding: 10 }}
-                    renderInput={(params) => <TextField {...params} label="Search music" variant="outlined" />}
-                    renderOption={(option) => {
+            <Grid alignItems="center" alignContent="center">
+                <FormLabel>
+                    <Autocomplete
+                        id="combo-box-demo"
+                        onInputChange={this.handleChange}
+                        options={this.tale}
+                        getOptionLabel={(option) => option.title}
+                        onChange={this.handleClick}
+                        style={{ width: 800, padding: 10 }}
+                        renderInput={(params) => <TextField {...params} label="Search music" variant="outlined" />}
+                        renderOption={(option) => {
 
-                        return (
-                            <List >
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <img src={option.image_url}/>
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary={option.title} secondary={option.artist} />
-                                </ListItem>
-                            </List>
-                        );
-                    }}
-                />
-                <Snackbar open={this.state.openSucess} autoHideDuration={1500} onClose={this.handleClose}>
-                    <Alert onClose={this.handleClose} severity="success">
-                        Musica adicionada a fila!
-                    </Alert>
-                </Snackbar>
-            </FormLabel>
+                            return (
+                                <List >
+                                    <ListItem>
+                                        <ListItemAvatar>
+                                            <Avatar>
+                                                <img src={option.image_url}/>
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary={option.title} secondary={option.artist} />
+                                    </ListItem>
+                                </List>
+                            );
+                        }}
+                    />
+                    <Snackbar open={this.state.openSucess} autoHideDuration={1500} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            Musica adicionada a fila!
+                        </Alert>
+                    </Snackbar>
+                </FormLabel>
+            </Grid>
         )
     }
 }

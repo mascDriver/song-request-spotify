@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import {Grid, Button, Typography, Card} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import CreateRoomPage from "./CreateRoomPage";
 import MusicPlayer from "./MusicPlayer";
 import SearchMusic from "./SearchMusic";
 import ClipboardCustom from "./Clipboard";
+import CustomButtom from "./CustomButtom";
+
 
 export default class Room extends Component {
     constructor(props) {
@@ -111,9 +113,8 @@ export default class Room extends Component {
                                     updateCallback={this.getRoomDetails}/>
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <Button variant="contained" color="secondary" onClick={() => this.updateShowSettings(false)}>
-                        Close
-                    </Button>
+                    <CustomButtom variant="contained" value="Close" color="red"
+                                  onClick={() => this.updateShowSettings(false)}/>
                 </Grid>
             </Grid>
         )
@@ -121,9 +122,8 @@ export default class Room extends Component {
     renderSettingsButton(){
         return (
             <Grid item xs={12} align="center">
-                <Button variant="contained" color="primary" onClick={() => this.updateShowSettings(true)}>
-                    Configurações
-                </Button>
+                <CustomButtom variant="contained" color="blue" value="Configurações"
+                              onClick={() => this.updateShowSettings(true)}/>
             </Grid>
         )
     }
@@ -132,23 +132,32 @@ export default class Room extends Component {
             return this.renderSettings()
         }
         return (
-            <Grid container spacing={1}>
-                <Grid item  xs={12} align="center">
-                    <SearchMusic/>
-                </Grid>
-                <MusicPlayer {...this.state.song} />
-                {this.state.isHost ? this.renderSettingsButton()  : null}
-                <Grid item  xs={12} align="center">
-                    <Button variant="contained" color="secondary" onClick={this.leaveButtonPressed}>
-                        Sair da sala
-                    </Button>
-                </Grid>
-
-                {this.state.isHost ?
-                    <Grid item  xs={12} align="center">
-                        <ClipboardCustom roomCode={this.roomCode}/>
+            <Grid alignItems="center" >
+                <Grid container spacing={4}>
+                    <Grid item spacing={2}>
+                        <Grid item  xs={12} align="center">
+                            <SearchMusic/>
+                        </Grid>
+                        <MusicPlayer {...this.state.song} />
                     </Grid>
-                    : null}
+
+                </Grid>
+                <Grid container alignItems="center" spacing={2}>
+                    <Grid item  xs={4} align="center">
+                        <CustomButtom value="Sair da sala" variant="contained" color="red"
+                                      onClick={this.leaveButtonPressed}/>
+                    </Grid>
+                    <Grid item  xs={4} align="center">
+                        {this.state.isHost ?
+                            <Grid item  xs={12} align="center">
+                                <ClipboardCustom roomCode={this.roomCode}/>
+                            </Grid>
+                            : null}
+                    </Grid>
+                    <Grid item  xs={4} align="center">
+                        {this.state.isHost ? this.renderSettingsButton()  : null}
+                    </Grid>
+                </Grid>
             </Grid>
         );
     }

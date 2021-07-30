@@ -19,6 +19,10 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
+    bar: {
+        backgroundColor:
+            theme.palette.type === 'light' ? '#885F66' : theme.palette.grey[800],
+    },
     grow: {
         flexGrow: 1,
     },
@@ -182,7 +186,7 @@ export default function PrimarySearchAppBar() {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.bar}>
                 <Toolbar>
                     <IconButton
                         edge="start"
