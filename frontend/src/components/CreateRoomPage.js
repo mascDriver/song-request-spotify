@@ -239,12 +239,12 @@ export default class CreateRoomPage extends Component {
           </Grid>
           <Grid item xs={12} align="center">
             <FormControl>
-              <TextField
-                  onChange={this.handleKey}
-                  label="Digite ou cole sua key de acesso"
-                  labelPlacement="bottom"
-                  type="password"
-              />
+              {/*<TextField*/}
+              {/*    onChange={this.handleKey}*/}
+              {/*    label="Digite ou cole sua key de acesso"*/}
+              {/*    labelPlacement="bottom"*/}
+              {/*    type="password"*/}
+              {/*/>*/}
               <TextField
                   onChange={this.handleLinkStream}
                   placeholder="twitch.tv/mascDriver"
