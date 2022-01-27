@@ -1,5 +1,5 @@
-/venv/
-/frontend/node_modules/
+venv/
+frontend/node_modules/
 db.sqlite3
 node_modules
 .idea

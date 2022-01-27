@@ -1,7 +1,10 @@
-#SongRequest
+# SongRequest
 ### by mascDriver
 #### https://twitch.tv/mascDriver
 
+
+### site em execução
+#### https://song-request-spotify.herokuapp.com/
 # O que é isso?
 #### Nesse projeto foi realizado a elaboração de um song request no aplicativo "Spotify" logo o uso publico desse aplicativo pode acarretar no banimento em diversas plataformas e nao me responsabilizo por isso, taokey?
 Utilizado Django(python) e React(JavaScript) temos de forma dinâmica a criação de salas onde integrantes dessa sala podem fazer requisições de músicas à partir de sua conta então tenha uma conta premium do spotify para usufruir melhor desse recurso
